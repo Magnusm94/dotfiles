@@ -165,6 +165,8 @@ class ValueHolder:
     
     
 a = ValueHolder(1111, base=2)
+# print(a + a)
+# print(a.hexadecimal)
 # print(a ** 2)
 # print(a.binary)
 # a(234, 10)
