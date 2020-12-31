@@ -66,7 +66,7 @@ zplug "valentinocossar/sublime"
 # zplug "kutsan/zsh-system-clipboard"
 
 # Untested. Installation: worked
-zplug "skywind3000/z.lua"
+# zplug "skywind3000/z.lua"
 
 # Untested. Installation: worked
 # zplug "sinetoami/web-search"
@@ -111,7 +111,7 @@ zplug "changyuheng/zsh-interactive-cd"
 # zplug "oknowton/zsh-dwim"
 
 # Untested. Installation: worked
-zplug "kazhala/dotbare"
+# zplug "kazhala/dotbare"
 
 # Untested. Installer works. Installation: worked
 # zplug "KKRainbow/zsh-command-note.plugin"
