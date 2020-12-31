@@ -94,6 +94,8 @@ echo "Installation complete."
 echo "To Update Vim plugins, please enter command: ':PlugInstall'"
 echo "Zplug may require confirmation before installing plugins."
 echo "Sourcing zshrc..."
-source ~/.zshrc
-
 echo "Enjoy :)"
+(
+echo "y"
+) | /bin/zsh
+
