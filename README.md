@@ -13,7 +13,12 @@ Not completed. Contains several useless lines. Going to split this further apart
 Still testing plugins. I need to comment on these, and figure out which works and which does not.
 Requires zplug to be installed to .zplug/
 
-
 ## Vim
-Currently messed up the config. It's under development.
+Completely rewritten 28.03.2021.
+
+Vimrc sources files from ~/.vim where settings are semi-modular.
+
+* vimrc settings are found in ~/.vim/vimrc
+* Current file templates are located in ~/.vim/templates
 Requires plug.
+
