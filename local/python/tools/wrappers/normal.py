@@ -11,12 +11,3 @@ def timer(func):
         )
         return data
     return wrapper
-
-
-
-@timer
-def print_name(name):
-    print(name)
-
-
-print_name('Magnus')
