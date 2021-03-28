@@ -13,25 +13,17 @@ echo "Setting up ZSH..."
 #### Install zsh
 sudo pacman -S zsh --noconfirm --needed
 
-
 #### Installing dependencies for p10k
 sudo pacman -S powerline ttf-nerd-fonts-symbols --noconfirm --needed
-
 
 #### Replaces default shell with zsh. (Requires user password)
 echo "Requires password for $USER" && chsh -s /usr/bin/zsh
 
-
 #### Install zplug
-git clone https://github.com/zplug/zplug.git && mv zplug ~/.zplug
+git clone https://github.com/zplug/zplug.git && cp zplug ~/.zplug
 
-
-#### Moving/replacing p10k.zsh
-mv zsh/p10k.zsh ~/.p10k.zsh
-
-
-#### Moving/replacing zshrc
-mv zsh/zshrc ~/.zshrc
+#### Moving rc files
+cp zsh/.* ~/
 
 
 
@@ -46,7 +38,7 @@ sudo pacman -S vim --noconfirm --needed
 yay -S vim-plug
 
 #### moving/replacing vimrc
-mv vim/vimrc ~/.vimrc
+cp -r vim/.* ~/
 
 
 #########
@@ -59,7 +51,7 @@ echo "Setting up Kitty..."
 sudo pacman -S kitty --noconfirm --needed
 
 #### Move/replace config files
-mkdir -p ~/.config/kitty && -mv config_files/kitty/kitty.conf ~/.config/kitty/kitty.conf
+mkdir -p ~/.config/kitty && cp config_files/kitty/kitty.conf ~/.config/kitty/kitty.conf
 
 
 ######
@@ -72,7 +64,7 @@ echo "Setting up i3..."
 sudo pacman -S i3-gaps i3blocks i3lock i3status --noconfirm --needed
 
 #### Move/replace configuration files
-mv config_files/i3/* ~/.config
+cp config_files/i3/* ~/.config
 
 
 
@@ -85,7 +77,7 @@ echo "Creating and moving python directories..."
 python << EOL
 import os
 version = ".".join([i.rstrip() for i in os.popen("python --version")][0].replace(' ', '').lower().split('.')[:2])
-os.system(f"mkdir -p ~/.local/lib/{version}/site-packages && mv local/python/tools ~/.local/lib/{version}/site-packages")
+os.system(f"mkdir -p ~/.local/lib/{version}/site-packages && cp local/python/tools ~/.local/lib/{version}/site-packages")
 EOL
 
 

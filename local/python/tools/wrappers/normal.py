@@ -7,9 +7,16 @@ def timer(func):
         start = time.perf_counter()
         data = func(*args, **kwargs)
         print(
-        f'Completed task in \
-        {time.perf_counter() - start} seconds.'
+        f'Completed task in {time.perf_counter() - start} seconds.'
         )
         return data
     return wrapper
 
+
+
+@timer
+def print_name(name):
+    print(name)
+
+
+print_name('Magnus')
