@@ -1,5 +1,7 @@
 # Personal config files
 
+## installer.sh only works on Arch Linux or other distros using Pacman.
+
 ## Zsh
 Some of the files are currently under development.
 
