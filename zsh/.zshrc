@@ -1,13 +1,11 @@
-setopt HIST_IGNORE_ALL_DUPS
+
+# History
+source ~/.zsh/sourcefiles.zsh
+
 bindkey -v
 WORDCHARS=${WORDCHARS//[\/]}
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
-# if [[ ${ZIM_HOME}/init.zsh -ot ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
-  # source ${ZIM_HOME}/zimfw.zsh init -q
-# fi
-
-# source ${ZIM_HOME}/init.zsh
 zmodload -F zsh/terminfo +p:terminfo
 
 if [[ -n ${terminfo[kcuu1]} && -n ${terminfo[kcud1]} ]]; then
@@ -26,8 +24,6 @@ alias pacman="sudo pacman"
 alias jcon="jupyter-console"
 alias py='python3'
 alias status="archey3"
-
-PATH=$PATH:$HOME/.local/bin/
 
 
 bindkey '^P' history-substring-search-up
