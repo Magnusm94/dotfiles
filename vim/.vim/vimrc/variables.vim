@@ -6,4 +6,4 @@ set expandtab
 set shiftwidth=2
 autocmd Filetype * :NoMatchParen
 set formatoptions-=cro
-set signalcolumn=no
+set signcolumn=no
