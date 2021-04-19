@@ -1,4 +1,4 @@
-map <S-T> :vs <CR>
+map <S-T> :vs <CR> :vert ba<CR>
 map <C-c> <plug>NERDCommenterToggle
 map <C-F10> :TagbarOpenAutoClose<Cr>
 map <C-F11> :tab ba<CR>

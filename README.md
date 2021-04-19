@@ -1,26 +1,48 @@
-# Personal config files
+# Zsh
 
-## installer.sh only works on Arch Linux or other distros using Pacman.
+## Requirements:
+The current zshrc is made to attempt being able to run without specific requirements (besides `ZSH`). It does look up if files exists or not before sourcing, but there may still be errors. Please report if anything would occur.
 
-## Zsh
-Some of the files are currently under development.
+## Dependencies:
 
-### p10k.zsh
-Requires nerdfonts and powerline
+### Zplug:
+Currently used plugin manager.
+```
+https://github.com/zplug/zplug
+```
 
-### zshrc
-Not completed. Contains several useless lines. Going to split this further apart later on.
+### Fzf
+This is configured to use both `fzf` and `fzf-tab`.
+```
+https://github.com/junegunn/fzf
+https://github.com/Aloxaf/fzf-tab
+```
 
-### zplug.zsh
-Still testing plugins. I need to comment on these, and figure out which works and which does not.
-Requires zplug to be installed to .zplug/
+### Powerlevel10k
+To properly use p10k config. Contains symbols etc, but is not required.
+```
+https://github.com/romkatv/powerlevel10k
+```
 
-## Vim
-Completely rewritten 28.03.2021.
+### Nerd-fonts
+To properly use p10k config, the nerd-fonts-symbols package is required at a minimum.
+```
+https://github.com/ryanoasis/nerd-fonts
+```
 
-Vimrc sources files from ~/.vim where settings are semi-modular.
 
-* vimrc settings are found in ~/.vim/vimrc
-* Current file templates are located in ~/.vim/templates
-Requires plug.
+# Vim
 
+## Requirements:
+
+### vim-plug:
+```
+https://github.com/junegunn/vim-plug
+```
+
+## Other dependencies:
+* Python version 3. May cause syntax highlight errors for version 2.
+
+* GCC
+
+* Ctags
