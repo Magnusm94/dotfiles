@@ -11,6 +11,7 @@ Currently used plugin manager.
 https://github.com/zplug/zplug
 ```
 
+
 ### Fzf:
 This is configured to use both `fzf` and `fzf-tab`.
 ```
@@ -32,6 +33,7 @@ https://github.com/ryanoasis/nerd-fonts
 
 ### Known issues:
 There seems to be issues with `HISTFILE` where `CTRL+r` only reads the last 30 inputs. Possible overwriting of variable in plugins from zplug. This is related to output from `history` most likely.
+
 It would also be beneficial to attempt speeding up the load-times. One way to achieve this could be by decreasing the amount of plugins + keeping them local. Possibly also remove unused features.
 
 # Vim
