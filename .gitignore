@@ -1,0 +1,4 @@
+# Ignore files
+update.sh
+.zsh/history/
+kitty/themes/

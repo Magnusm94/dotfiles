@@ -7,3 +7,4 @@ set shiftwidth=2
 autocmd Filetype * :NoMatchParen
 set formatoptions-=cro
 set signcolumn=no
+set foldlevel=0

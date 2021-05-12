@@ -5,11 +5,13 @@ source ~/.vim/vimrc/plugins.vim
 " Global variables.
 source ~/.vim/vimrc/variables.vim
 
-" Cusom functions
+" Custom functions
 source ~/.vim/vimrc/functions.vim
 
 " Settings for programming languages.
 source ~/.vim/vimrc/python.vim
+
+" Keybinds
 source ~/.vim/vimrc/cpp.vim
 
 " Global keybinds.

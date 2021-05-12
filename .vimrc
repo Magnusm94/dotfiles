@@ -1,11 +1,20 @@
-" Loads plugins and their settings.
+" Plugin imports.
 source ~/.vim/vimrc/plugins.vim
 
-" Custom global variables.
+" Global variables.
 source ~/.vim/vimrc/variables.vim
 
-" Settings for different filetypes.
-source ~/.vim/vimrc/filesettings.vim
+" Custom functions
+source ~/.vim/vimrc/functions.vim
+
+" Settings for programming languages.
+" source ~/.vim/vimrc/python.vim
 
 " Keybinds
+source ~/.vim/vimrc/cpp.vim
+
+" Global keybinds.
 source ~/.vim/vimrc/keybinds.vim
+
+" Rules for programming languages
+source ~/.vim/vimrc/filesettings.vim

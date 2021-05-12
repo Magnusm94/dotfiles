@@ -9,9 +9,10 @@
 autocmd BufNewFile *.py 0r ~/.vim/templates/new_python
 
 " Runs python file when pressing F5
-autocmd FileType python map <buffer> <F5> :w<CR>:exec '!python %' shellescape(@%, 1)<CR>
+autocmd FileType python map <buffer> <F5> :w<CR>:! python %<CR>
+
 
 autocmd FileType python map <buffer> <C-F5> yPgv:!python<CR>
 
 " Loads custom comment with F6
-autocmd FileType python map <buffer> <F6> :read ~/.vim/templates/python_docstring <CR>
+autocmd FileType python map <buffer> <F6> :read ~/.vim/templates/function_comment <CR>

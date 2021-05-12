@@ -1,0 +1,55 @@
+# Increase volume
+"volume 2"
+  XF86AudioRaiseVolume
+
+# Increase volume
+"volume -2"
+  XF86AudioLowerVolume
+
+# Mute volume
+"pactl set-sink-mute @DEFAULT_SINK@ toggle"
+  XF86AudioMute
+
+# Pause Spotify
+"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+  XF86AudioPlay
+
+# Spotify next song
+"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+  XF86AudioNext
+
+# Spotify previous song
+"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+  XF86AudioPrev
+
+# Screenshot
+"flameshot gui"
+  Print
+
+# Make screen more orange <CTRL ALT F10>
+"orange +50"
+  m:0x19 + c:95
+
+# Make screen less orange <CTRL ALT F11>
+"orange -50"
+  m:0x19 + c:76
+
+# Trigger lights in bedroom <CTRL ALT F12>
+"hue bedroom switch"
+  m:0x19 + c:96
+
+# Trigger light on desk <ALT F12>
+"hue desk switch"
+  m:0x8 + c:96
+
+# Increase light desk <ALT F11>
+"hue desk increase"
+  m:0x8 + c:95
+
+# Dim light desk <ALT F10>
+"hue desk dim"
+  m:0x8 + c:76
+
+# Open virt-manager <CTRL ALT F9>
+"virt-manager"
+  m:0x9 + c:75

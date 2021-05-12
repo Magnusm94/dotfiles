@@ -1,3 +1,5 @@
+map <C-F8> :call DiffWithSaved()<Cr>
+map <C-F9> :call ToggleLineNumber()<Cr>
 map <S-T> :vs <CR> :vert ba<CR>
 map <C-c> <plug>NERDCommenterToggle
 map <C-F10> :TagbarOpenAutoClose<Cr>
