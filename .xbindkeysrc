@@ -35,19 +35,19 @@
   m:0x19 + c:76
 
 # Trigger lights in bedroom <CTRL ALT F12>
-"hue bedroom switch"
+"hue -l sofa --switch"
   m:0x19 + c:96
 
 # Trigger light on desk <ALT F12>
-"hue desk switch"
+"hue -l desk --switch"
   m:0x8 + c:96
 
 # Increase light desk <ALT F11>
-"hue desk increase"
+"hue -l desk -i 20"
   m:0x8 + c:95
 
 # Dim light desk <ALT F10>
-"hue desk dim"
+"hue -l desk -d 20"
   m:0x8 + c:76
 
 # Open virt-manager <CTRL ALT F9>

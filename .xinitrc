@@ -45,10 +45,7 @@ xbindkeys
 
 # Custom scripts
 orange
-pulseaudio --start
-bluetoothctl power on
-bluetoothctl connect 98:52:3D:3E:70:E7
-pactl -- set-default-sink bluez_sink.98_52_3D_3E_70_E7.a2dp_sink
+(echo 4) | bluetooth
 mouse_settings
 #bluetooth
 

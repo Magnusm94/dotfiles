@@ -16,6 +16,8 @@ source ~/.zsh/aliases.zsh
 # Source keybinds
 source ~/.zsh/keybinds.zsh
 
+# Source settings
+source ~/.zsh/settings.zsh
 
 PATH=$PATH:$HOME/.local/bin/
 

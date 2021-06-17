@@ -1,152 +1,28 @@
-\documentclass{article}
-\usepackage[a4paper, margin=0.5in]{geometry}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[english]{babel}
-\usepackage{pdfpages}
-\usepackage{graphicx}
-\usepackage{mathptmx}
-\usepackage[parfill]{parskip}
-\usepackage{amssymb}
-\usepackage{fancyvrb}
-\usepackage{mathtools}
-\usepackage{array}
-\usepackage{verbatim}
-\usepackage{hyperref}
-\usepackage{listings}
-\usepackage{xcolor}
-\usepackage{unicode-math}
-\usepackage{color}
-\usepackage{lmodern}
-\usepackage{amsmath}
+\documentclass[a4paper, 12pt]{article}
+\usepackage{template}
 
+\begin{filecontents}{\jobname.bib}
+\end{filecontents}
 
-% \DeclareUnicodeCharacter{2212}{-}
-% \DeclareUnicodeCharacter{2212}{-}
-
-\graphicspath{ {./} }
-
-\newcommand*{\carry}[1][1]{\overset{#1}}
-\newcolumntype{B}[1]{r*{#1}{@{\,}r}}
-
-% Default fixed font does not support bold face
-\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{10} % for bold
-\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{10}  % for normal
-
-% Custom colors
-\definecolor{deepblue}{rgb}{0,0,0.5}
-\definecolor{deepred}{rgb}{0.6,0,0}
-\definecolor{deepgreen}{rgb}{0,0.5,0}
-
-\lstset{
-  basicstyle=\ttfamily,
-  columns=fullflexible,
-  breaklines=true,
-  showstringspaces=false,
-  commentstyle=\color{red},
-  keywordstyle=\color{blue},
-  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
-}
-
-
-% Python style for highlighting
-\newcommand\pythonstyle{\lstset{
-language=Python,
-basicstyle=\ttm,
-otherkeywords={self},             % Add keywords here
-keywordstyle=\ttb\color{deepblue},
-emph={MyClass,__init__},          % Custom highlighting
-emphstyle=\ttb\color{deepred},    % Custom highlighting style
-stringstyle=\color{deepgreen},
-fancyvrb=true,
-frame=single,                         % Any extra options here
-showstringspaces=true,            % 
-frameround=tttt
-}}
-
-% % Bash syntax highlightning
-\newcommand\bashstyle{\lstset{
-language=bash,
-% basicstyle=\ttm,
-stringstyle=\color{deepred},
-otherkeywords={
-  grep,
-  mv,
-  sudo,
-  systemctl,
-  cp,
-  ln,
-  chmod,
-  git,
-  apt,
-  EOL
-},
-emph={},
-emphstyle=\color{cyan},
-keywordstyle=\ttb\color{deepblue},
-fancyvrb=true,
-frame=single,
-frameround=tttt
-}}
-
-% Bash environment
-\lstnewenvironment{bash}[1][]
-{
-\bashstyle
-\lstset{#1}
-}
-{}
-
-% Python environment
-\lstnewenvironment{python}[1][]
-{
-\pythonstyle
-\lstset{#1}
-}
-{}
-
-% Python for external files
-\newcommand\pythonexternal[2][]{{
-\pythonstyle
-\lstinputlisting[#1]{#2}}}
-
-% Python for inline
-\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
-
-\hypersetup{
-    % Makes the page numbers of index entries into hyperlinks
-    hyperindex=true,
-    % Makes the page numbers instead of the text to be link in the Table of contents.
-    linktocpage=false,
-    % Allows links to be broken into multiple lines.
-    breaklinks=false,
-    % Colours the text for links and anchors, these colours will appear in the printed version
-    colorlinks=true,
-    % Colour for normal internal links
-    linkcolor=blue,
-    % Colour for anchor (target) text
-    anchorcolor=black,
-    % Colour for bibliographical citations
-    citecolor=green,
-    % Colour for links that open local files
-    filecolor=magenta,
-    % Colour for linked URLs
-    urlcolor=cyan,
-    % Use small caps instead of colours for links
-    frenchlinks=false
-}
-
-\title{<>}
-\author{by Magnus Marvik}
-\date{<>}
-
-\setcounter{secnumdepth}{1}
+\title{<Title here>}
 
 \begin{document}
+\nocite{*}
 \maketitle
 \newpage
 \tableofcontents
 \newpage
 
+\section{1}
 
+% Content here:
+
+
+
+% Content end
+
+% Generating bibliography.
+\newpage
+\bibliographystyle{apacite}
+\bibliography{\jobname}
 \end{document}

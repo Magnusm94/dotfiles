@@ -10,9 +10,6 @@ source ~/.vim/vimrc/functions.vim
 " Settings for programming languages.
 " source ~/.vim/vimrc/python.vim
 
-" Keybinds
-source ~/.vim/vimrc/cpp.vim
-
 " Global keybinds.
 source ~/.vim/vimrc/keybinds.vim
 
