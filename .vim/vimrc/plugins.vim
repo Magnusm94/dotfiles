@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
 " Syntastic
-source ~/.vim/vimrc/syntastic.vim
+" source ~/.vim/vimrc/syntastic.vim
 
 " Nerdtree and Nerdcommenter
 source ~/.vim/vimrc/nerd.vim

@@ -22,6 +22,10 @@
 "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
   XF86AudioPrev
 
+# Open pavucontrol
+"pavucontrol"
+  m:0x4 + c:73
+
 # Screenshot
 "flameshot gui"
   Print
@@ -53,3 +57,14 @@
 # Open virt-manager <CTRL ALT F9>
 "virt-manager"
   m:0x9 + c:75
+
+# Connect to phone with scrcpy
+"(echo 1; echo 2) | connect"
+  m:0x18 + c:74
+
+# Set display brightness
+"displaybrightness 0"
+  m:0x19 + c:117
+
+"displaybrightness 100"
+  m:0x19 + c:112

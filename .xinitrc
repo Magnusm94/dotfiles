@@ -45,7 +45,7 @@ xbindkeys
 
 # Custom scripts
 orange
-(echo 4) | bluetooth
+# bluetooth
 mouse_settings
 #bluetooth
 
