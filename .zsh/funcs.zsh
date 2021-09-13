@@ -56,3 +56,12 @@ get_keybinds(){
 
 zle -N get_first
 bindkey '^I' get_first
+
+
+
+__VimOpen(){
+  if [ -f $1 ]; then
+    cp --backup=numbered $1 .$1
+  fi
+  vim $1
+}

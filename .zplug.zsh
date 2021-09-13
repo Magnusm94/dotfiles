@@ -10,9 +10,6 @@ zplug "zsh-users/zsh-autosuggestions"
 # Z plugin: jump to 'frecent' dirs
 zplug "agkozak/zsh-z"
 
-# Double tap ESC button to insert "sudo" on start of command.
-zplug "hcgraf/zsh-sudo"
-
 # Sets title for window. Helps with multiple terminal navigation.
 zplug "jreese/zsh-titles"
 

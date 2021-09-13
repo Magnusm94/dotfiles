@@ -1,0 +1,84 @@
+#!/bin/bash
+
+ProjectRoot="PATH/TO/ROOT"
+MainFile=main
+Driver=xelatex
+PDFDRIVER=okular
+UseBiblio=false
+Build=true
+Delete=true
+OpenPDF=true
+
+
+# Comment out the types of files you want to keep if you are deleting files!
+DeleteFileTypes=(
+  .aux
+  .bbl
+  .blg
+  .log
+  .out
+  # .pdf
+  # .tex
+  .toc
+)
+
+LatexBuild(){
+  if command -v $Driver >/dev/null; then
+    eval $Driver $MainFile
+    if command -v bibtex >/dev/null; then
+      [ $UseBiblio == true ] && eval "bibtex $MainFile"
+    fi
+    eval $Driver $MainFile
+    eval $Driver $MainFile
+  else
+    echo "Invalid driver"
+  fi
+  return 0
+}
+
+DeleteFiles(){
+  CMD="rm -rf "
+  for filetype in ${DeleteFileTypes[@]}; do
+    CMD+="*$filetype "
+  done
+  eval $CMD
+}
+
+PDF(){
+  if [ ! $(pidof $PDFDRIVER) ]; then
+    eval "$PDFDRIVER $MainFile.pdf &"
+  else
+    echo "PDF driver is already active."
+  fi
+  return 0
+}
+
+if [ $(pwd) == $ProjectRoot ]; then
+  truncate -s 0 content.tex
+else
+  sed -n '1p' content.tex > content.tmp && mv content.tmp content.tex
+fi
+
+for i in $(ls | grep tex); do
+  if [ -f $i ] && [ $i != main.tex ] && [ $i != content.tex ]; then
+    echo "\input{$(echo "$i" | grep -Eo "^[^.]*")}" >> content.tex
+  fi
+done
+
+for i in $(ls); do
+  if [ -d $i ] && [ -f $i/content.tex ]; then
+    echo "\use{$i}" >> content.tex
+  fi
+done
+
+if [ $Delete == true ]; then
+  DeleteFiles
+fi
+
+if [ $Build == true ]; then
+  LatexBuild
+fi
+
+if [ $OpenPDF == true ]; then
+  PDF
+fi

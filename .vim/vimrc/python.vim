@@ -9,7 +9,7 @@
 autocmd BufNewFile *.py 0r ~/.vim/templates/new_python
 
 " Runs python file when pressing F5
-autocmd FileType python map <buffer> <F5> :w<CR>:! python %<CR>
+autocmd FileType python map <buffer> <F5> :! __numberedbackup %<CR>:w<CR>:! python %<CR>
 
 
 autocmd FileType python map <buffer> <C-F5> yPgv:!python<CR>

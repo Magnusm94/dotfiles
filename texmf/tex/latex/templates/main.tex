@@ -1,0 +1,286 @@
+% \usepackage{lmodern}
+\usepackage{apacite}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+\usepackage[a4paper, margin=0.5in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{pdfpages}
+\usepackage{graphicx}
+\usepackage{mathptmx}
+\usepackage[parfill]{parskip}
+\usepackage{amssymb}
+\usepackage{fancyvrb}
+\usepackage{mathtools}
+\usepackage{array}
+\usepackage{verbatim}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+% \usepackage{unicode-math}
+\usepackage{color}
+\usepackage{lmodern}
+\usepackage{amsmath}
+% \usepackage{filecontents}
+% \usepackage{subfiles}
+\usepackage{xr}
+
+
+\ProvidesPackage{import}[2020/04/01 \space  v 6.2]
+\ProcessOptions
+
+\@ifundefined{import}{%
+ \newcommand{\import}{\global\let\import@path\@empty \@doimport\input}
+}{
+ \PackageWarning{import}{\string\import\space command is already defined!^^J%
+   Defining only its \string\inputfrom\space alias.}
+}
+\newcommand{\inputfrom}{\global\let\import@path\@empty \@doimport\input}
+\newcommand{\subimport}{\@doimport\input}
+\newcommand{\subinputfrom}{\@doimport\input}
+\newcommand{\includefrom}{\global\let\import@path\@empty \@doimport\include}
+\newcommand{\subincludefrom}{\@doimport\include}
+
+% Consume now-meaningless "*"
+\def\@doimport#1{\@ifstar
+  {\@sub@import#1\im@iffileexists}{\@sub@import#1\im@iffileexists}}
+
+% #1 = import command,  #2 = switch for *,  #3 = import path extension
+\def\@sub@import#1#2#3{%
+  \begingroup
+  \protected@edef\@tempa{\endgroup
+    \let\noexpand\IfFileExists\noexpand#2%
+    \noexpand\@import  \noexpand#1%  param 1
+      {\@ifundefined{input@path}{}{\input@path}}% 2
+      {\@ifundefined{Ginput@path}{}{\Ginput@path}}% 3
+      {\import@path#3}{\import@path}% 4,5
+      {\ifx\IfFileExists\im@@IfFileExists \noexpand\im@@IfFileExists 
+       \else \noexpand\IfFileExists \fi}}% 6
+  \@tempa}
+%
+% #1 = import command (\input or \include)
+% #2 = previous input path list. #3 = previous graphics input path list.
+% #4 = full path added to each.  #5 = previous import path.  
+% #6 = previous \IfFileExists.   #7 = file name.
+%
+\def\@import#1#2#3#4#5#6#7{%
+  \protected@xdef\import@path{\import@path@fix{#4}}%
+  \protected@edef\input@path{{\import@path}#2}%
+  \protected@edef\Ginput@path{{\import@path}#3}%
+  \protected@edef\import@path@file{% use full path/file for non-*
+    \import@path #7}%
+%
+  \expandafter#1\expandafter{\import@path@file}%
+%
+  \let\IfFileExists#6% restore after \import*
+  \gdef\import@path{#5}%
+  \def\input@path{#2}\ifx\input@path\@empty \let\input@path\@undefined \fi
+  \def\Ginput@path{#3}\ifx\Ginput@path\@empty \let\Ginput@path\@undefined \fi
+}
+
+% Our version of \IfFileExists that gives priority to files on \input@path,
+% #1 = file name,  #2 = action when exists, #3 = action when not exists
+% In 2020 LaTeX redefines \IfFileExists, so I need two variants.
+\@ifundefined{IfFileExists@}{% pre-2020
+\long\def \im@iffileexists#1#2#3{%
+  \let\@filef@und\@undefined
+  \ifx\input@path\@undefined\else 
+    \@iffileonpath{#1}{% (also defines \@filef@und)
+      \def\reserved@a{#2}%
+    }{}% no action yet for not found
+  \fi
+  \ifx\@filef@und\@undefined % not found on \input@path
+    \openin\@inputcheck#1 %
+    \ifeof\@inputcheck
+      \def\reserved@a{#3}%
+    \else
+      \closein\@inputcheck
+      \edef\@filef@und{#1 }%
+      \def\reserved@a{#2}%
+  \fi\fi
+  \reserved@a}
+}{% ca 2020
+\DeclareRobustCommand\im@iffileexists[1]{%
+  \set@curr@file{#1}%
+  \expandafter\im@iffileexists@\expandafter{\@curr@file}}
+\long\def \im@iffileexists@#1#2#3{%
+  \let\@filef@und\@undefined
+  \ifx\input@path\@undefined\else 
+    \@iffileonpath{#1}{% (also defines \@filef@und)
+      \def\reserved@a{#2}%
+    }{}% no action yet for not found
+  \fi
+  \ifx\@filef@und\@undefined % not found on \input@path
+    \openin\@inputcheck"#1" %
+    \ifeof\@inputcheck
+      \def\reserved@a{#3}%
+    \else
+      \closein\@inputcheck
+      \edef\@filef@und{"#1" }%
+      \def\reserved@a{#2}%
+  \fi\fi
+  \reserved@a}
+ }
+
+\let\im@@IfFileExists\IfFileExists % remember original
+\gdef\import@path{}
+
+\let\import@path@fix\@firstofone % default
+
+% Check for "./" currdir, and make \import@path@fix ensure trailing /
+\gdef\@gtempa{./}
+\ifx\@gtempa\@currdir % *x style paths
+\gdef\import@path@fix#1{\ifx\delimiter#1\delimiter\else
+  \@ensure@one@trailing@slash#1///\delimiter\fi}%
+ \gdef\@ensure@one@trailing@slash#1///#2\delimiter{#1/}%
+\fi
+
+% Check for "[]" currdir (VMS file names) and set \import@path@fix appropriately
+% \subimport{[.subdir]}{file}
+\gdef\@gtempa{[]}
+\ifx\@gtempa\@currdir % VMS directory syntax
+ \gdef\import@path@fix#1{\@gobbleVMSbrack#1][>}
+ \gdef\@gobbleVMSbrack#1][#2{#1\ifx>#2\@empty
+    \expandafter \strip@prefix \fi % Gobble up to >
+    \@gobbleVMSbrack #2}
+\fi
+
+
+\graphicspath{ {./} }
+
+\newcommand*{\carry}[1][1]{\overset{#1}}
+\newcolumntype{B}[1]{r*{#1}{@{\,}r}}
+
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{10} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{10}  % for normal
+
+
+% Custom colors
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  breaklines=true,
+  showstringspaces=false,
+  commentstyle=\color{red},
+  keywordstyle=\color{blue},
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
+}
+
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+language=Python,
+basicstyle=\ttm,
+otherkeywords={self},             % Add keywords here
+keywordstyle=\ttb\color{deepblue},
+emph={
+  MyClass,
+  __init__, 
+  __call__, 
+  },          % Custom highlighting
+emphstyle=\ttb\color{deepred},    % Custom highlighting style
+stringstyle=\color{deepgreen},
+fancyvrb=true,
+frame=single,                         % Any extra options here
+showstringspaces=false,               % 
+frameround=tttt
+}}
+
+% % Bash syntax highlightning
+\newcommand\bashstyle{\lstset{
+language=bash,
+% basicstyle=\ttm,
+stringstyle=\color{deepred},
+otherkeywords={
+  grep,
+  mv,
+  sudo,
+  systemctl,
+  cp,
+  ln,
+  chmod,
+  git,
+  apt,
+  EOL
+},
+emph={},
+emphstyle=\color{cyan},
+keywordstyle=\ttb\color{deepblue},
+fancyvrb=true,
+frame=single,
+frameround=tttt
+}}
+
+% Bash environment
+\lstnewenvironment{bash}[1][]
+{
+\bashstyle
+\lstset{#1}
+}
+{}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+\hypersetup{
+    % Makes the page numbers of index entries into hyperlinks
+    % hyperindex=true,
+    % Makes the page numbers instead of the text to be link in the Table of contents.
+    linktocpage=false,
+    % Allows links to be broken into multiple lines.
+    breaklinks=false,
+    % Colours the text for links and anchors, these colours will appear in the printed version
+    colorlinks=true,
+    % Colour for normal internal links
+    linkcolor=blue,
+    % Colour for anchor (target) text
+    anchorcolor=black,
+    % Colour for bibliographical citations
+    citecolor=blue,
+    % Colour for links that open local files
+    filecolor=magenta,
+    % Colour for linked URLs
+    urlcolor=cyan,
+    % Use small caps instead of colours for links
+    frenchlinks=false
+}
+
+% THIS PATH MUST BE EDITED
+\def\use#1{
+  \import{/home/magnus/Documents/latex/#1}{content}
+}
+
+
+\author{By <Enter your name here.>}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{test}
+\section{random}
+
+\end{document}
+
+

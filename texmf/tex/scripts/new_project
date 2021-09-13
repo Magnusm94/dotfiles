@@ -1,0 +1,44 @@
+#!/bin/bash
+
+TitleString(){
+  for i in $@; do
+    python << EOL
+print("$i".title())
+EOL
+  done
+}
+
+LowerString(){
+  for i in $@; do
+    python << EOL
+print("$i".lower())
+EOL
+  done
+}
+
+StartProject(){
+  mkdir $1
+  cat << EOL > $i/content.tex
+\chapter{$(TitleString $1)}\label{$(LowerString $1)}
+% \input{}
+EOL
+  cat << EOL > $i/main.tex
+\documentclass[a4paper, 12pt]{report}
+\usepackage{template}
+\title{$(TitleString $1)}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\include{content}
+\end{document}
+EOL
+  cp build $i
+}
+
+for i in $@; do
+  if [ $i ] && [ ! -d $i ] && [ ! -f $i ]; then
+    StartProject $i
+  fi
+done
